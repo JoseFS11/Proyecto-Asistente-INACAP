@@ -1,22 +1,24 @@
 # 🎓 Asistente INACAP
 
-Este proyecto consiste en la creación de un asistente documental desarrollado en Python y Streamlit para consultar información contenida en reglamentos institucionales en formato PDF para poder solucionar consultas de los estudiantes sobre asistencia, notas, biblioteca, etc.
+## Descripción
 
-El sistema permite cargar automáticamente reglamentos, buscar información relevante mediante palabras clave o preguntas simples, y responder al usuario utilizando una interfaz conversacional inspirada en sistemas de Recuperación Aumentada por Generación (RAG).
+Este proyecto consiste en el desarrollo de un asistente documental orientado a la consulta de reglamentos institucionales de INACAP.
+
+La aplicación fue desarrollada utilizando **Python** y **Streamlit**, permitiendo buscar información dentro de distintos reglamentos en formato PDF mediante una interfaz conversacional inspirada en los principios de los sistemas **RAG (Retrieval Augmented Generation)**.
 
 ---
 
 ## Características
 
 - Lectura automática de archivos PDF.
-- Carga dinámica de reglamentos desde una carpeta local.
+- Carga dinámica de reglamentos.
 - Interfaz web desarrollada con Streamlit.
 - Historial de consultas.
-- Filtrado por reglamento.
+- Filtrado por reglamentos específicos.
 - Ranking básico de relevancia.
-- Recuperación de información basada en palabras clave.
-- Respuesta contextual basada en el contenido encontrado.
-- Diseño personalizado con identidad visual INACAP.
+- Recuperación de información mediante palabras clave.
+- Generación de respuestas contextualizadas.
+- Diseño institucional con logo INACAP.
 
 ---
 
@@ -29,13 +31,16 @@ Reglamentos PDF
 Extracción de texto
         │
         ▼
-Fragmentación del contenido
+Procesamiento de contenido
         │
         ▼
-Procesamiento de consulta
+Fragmentación de información
         │
         ▼
-Recuperación de información
+Procesamiento de consultas
+        │
+        ▼
+Búsqueda de coincidencias
         │
         ▼
 Ranking por relevancia
@@ -44,10 +49,26 @@ Ranking por relevancia
 Generación de respuesta
         │
         ▼
-Interfaz Streamlit
+Interfaz Web Streamlit
+```
 
 ---
 
+## Flujo de funcionamiento
+
+El sistema ejecuta los siguientes pasos:
+
+1. Cargar automáticamente todos los reglamentos disponibles.
+2. Extraer el contenido de cada documento PDF.
+3. Procesar la consulta realizada por el usuario.
+4. Identificar términos relevantes.
+5. Buscar coincidencias dentro de los reglamentos.
+6. Calcular relevancia de los resultados encontrados.
+7. Seleccionar la información más útil.
+8. Generar una respuesta contextualizada.
+9. Mostrar la respuesta mediante una interfaz conversacional.
+
+---
 
 ## Estructura del proyecto
 
@@ -69,64 +90,133 @@ ASISTENTE INACAP
 ├── README.md
 ├── web.py
 └── .gitignore
+```
 
 ---
 
-## Tecnologías Utilizadas
+# Archivos principales
 
-- Python: Lenguaje principal utilizado para el desarrollo del sistema.
-- Streamlit: utilizado para construir la interfaz web.
-- PyPDF: Biblioteca utilizada para extraer texto desde documentos PDF.
+### `web.py`
+
+Archivo principal del proyecto.
+
+Contiene:
+
+- Interfaz Streamlit.
+- Lectura de consultas.
+- Historial de preguntas.
+- Presentación de respuestas.
+- Gestión de filtros y reglamentos.
+
+---
+
+### `Reglamentos/`
+
+Carpeta que almacena todos los documentos PDF utilizados por el asistente.
+
+Los archivos son cargados automáticamente al iniciar la aplicación.
+
+---
+
+### `logo.png`
+
+Imagen institucional utilizada dentro de la interfaz gráfica.
+
+---
+
+### `app_respaldo.py`
+
+Versión inicial del proyecto desarrollada en consola.
+
+Se conserva como referencia del proceso de evolución del sistema.
+
+---
+
+## Tecnologías utilizadas
+
+### `Python`
+
+Lenguaje principal utilizado para el desarrollo del sistema.
+
+### `Streamlit`
+
+Framework utilizado para construir la interfaz web.
+
+### `PyPDF`
+
+Biblioteca utilizada para extraer texto desde documentos PDF.
 
 ---
 
 ## Instalación
 
-- Clonar el repositorio: git clone URL_DEL_REPOSITORIO
-- Acceder a la carpeta: cd "ASISTENTE INACAP"
-- Instalar dependencias: 
-  - pip install streamlit
-  - pip install pypdf
+### 1. Clonar el repositorio
+
+```bash
+git clone URL_DEL_REPOSITORIO
+```
+
+### 2. Acceder a la carpeta
+
+```bash
+cd "ASISTENTE INACAP"
+```
+
+### 3. Instalar dependencias
+
+```bash
+pip install streamlit
+pip install pypdf
+```
 
 ---
 
 ## Ejecución
 
-- Ejecutar la aplicación: streamlit run web.py
-- Luego acceder al navegador: http://localhost:8501
+Ejecutar la aplicación:
+
+```bash
+streamlit run web.py
+```
+
+Luego abrir:
+
+```text
+http://localhost:8501
+```
 
 ---
 
-## Funcionamiento
+## Conceptos aplicados
 
-- Lectura de Reglamentos: El sistema recorre automáticamente la carpeta: Reglamentos/ y extrae el contenido de todos los archivos PDF disponibles.
-- Procesamiento de Consulta: Las consultas del usuario son normalizadas para eliminar signos de puntuación y palabras irrelevantes.
-- Ejemplo: ¿Cuál es la nota mínima para aprobar?
-- Se transforma en: nota minima aprobar
-- Recuperación de Información: El sistema busca coincidencias dentro de los reglamentos utilizando palabras clave relevantes.
-- Ranking: Cada fragmento obtiene un puntaje según la cantidad de coincidencias encontradas. Posteriormente los resultados se ordenan para mostrar primero la información más relevante.
-- Generación de Respuesta: La información encontrada es formateada y presentada al usuario mediante una interfaz conversacional.
+Durante el desarrollo se trabajó con:
 
----
-
-## Conceptos Aplicados
-
-Durante el desarrollo se aplicaron conceptos relacionados con:
-- Procesamiento básico de texto.
-- Recuperación de información.
-- Ranking por relevancia.
 - Programación modular.
-- Interfaces web.
 - Manejo de archivos PDF.
-- Principios de arquitectura RAG.
+- Procesamiento de texto.
+- Recuperación de información.
+- Ranking de relevancia.
+- Interfaces web.
+- Arquitectura inspirada en RAG.
+- Gestión de estados mediante Streamlit.
+- Desarrollo de asistentes documentales.
 
 ---
 
-## Mejoras Futuras
+## Mejoras futuras
 
 - Integración con modelos de IA.
-- Exportación de respuestas.
-- Despliegue en servidor institucional.
+- Búsqueda semántica.
+- Respuestas más precisas.
+- Exportación de resultados.
+- Implementación de autenticación.
+- Publicación en servidor institucional.
 
 ---
 
+## Autor
+
+**José Solda Huenante**
+
+Proyecto académico desarrollado para la consulta automatizada de reglamentos institucionales mediante técnicas de recuperación documental y principios RAG.
+``
