@@ -1,2 +1,0 @@
-# Proyecto-Asistente-INACAP
-.
