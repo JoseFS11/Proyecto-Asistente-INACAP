@@ -2,7 +2,7 @@
 
 ## Descripción
 
-Este proyecto consiste en el desarrollo de un asistente documental orientado a la consulta de reglamentos institucionales de INACAP.
+El siguiente proyecto surge da raiz de las constantes consultas a docentes y administrativos por temas de notas, asistencia, becas, etc; es en base a esto que se desarrollo un asistente documental orientado a la consulta de reglamentos institucionales de INACAP, los cuales generalmente los alumnos no suelen leer y traen todas las respuestas que necesitan.
 
 La aplicación fue desarrollada utilizando **Python** y **Streamlit**, permitiendo buscar información dentro de distintos reglamentos en formato PDF mediante una interfaz conversacional inspirada en los principios de los sistemas **RAG (Retrieval Augmented Generation)**.
 
