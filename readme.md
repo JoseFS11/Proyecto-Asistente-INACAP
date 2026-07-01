@@ -1,12 +1,12 @@
 # 🎓 Asistente INACAP
 
-Asistente documental desarrollado en Python y Streamlit para consultar información contenida en reglamentos institucionales en formato PDF.
+Este proyecto consiste en la creación de un asistente documental desarrollado en Python y Streamlit para consultar información contenida en reglamentos institucionales en formato PDF para poder solucionar consultas de los estudiantes sobre asistencia, notas, biblioteca, etc.
 
 El sistema permite cargar automáticamente reglamentos, buscar información relevante mediante palabras clave o preguntas simples, y responder al usuario utilizando una interfaz conversacional inspirada en sistemas de Recuperación Aumentada por Generación (RAG).
 
 ---
 
-## 📋 Características
+## Características
 
 - Lectura automática de archivos PDF.
 - Carga dinámica de reglamentos desde una carpeta local.
@@ -20,7 +20,7 @@ El sistema permite cargar automáticamente reglamentos, buscar información rele
 
 ---
 
-## 🏗️ Arquitectura General
+## Arquitectura General
 
 ```text
 Reglamentos PDF
@@ -46,7 +46,12 @@ Generación de respuesta
         ▼
 Interfaz Streamlit
 
-📂 Estructura del Proyecto
+---
+
+
+## Estructura del proyecto
+
+```text
 ASISTENTE INACAP
 │
 ├── Reglamentos
@@ -59,82 +64,69 @@ ASISTENTE INACAP
 │   ├── practicas.pdf
 │   └── uso_de_talleres.pdf
 │
-├── web.py
-├── app.py
+├── app_respaldo.py
 ├── logo.png
-└── README.md
+├── README.md
+├── web.py
+└── .gitignore
 
-⚙️ Tecnologías Utilizadas
-Python
-Lenguaje principal utilizado para el desarrollo del sistema.
-Streamlit
-Framework utilizado para construir la interfaz web.
-PyPDF
-Biblioteca utilizada para extraer texto desde documentos PDF.
+---
 
-🚀 Instalación
+## Tecnologías Utilizadas
 
-Clonar el repositorio
-git clone URL_DEL_REPOSITORIO
+- Python: Lenguaje principal utilizado para el desarrollo del sistema.
+- Streamlit: utilizado para construir la interfaz web.
+- PyPDF: Biblioteca utilizada para extraer texto desde documentos PDF.
 
-Acceder a la carpeta
-cd "ASISTENTE INACAP"
+---
 
-Instalar dependencias
-pip install streamlit
-pip install pypdf
+## Instalación
 
-▶️ Ejecución
-Ejecutar la aplicación:
-streamlit run web.py
+- Clonar el repositorio: git clone URL_DEL_REPOSITORIO
+- Acceder a la carpeta: cd "ASISTENTE INACAP"
+- Instalar dependencias: 
+  - pip install streamlit
+  - pip install pypdf
 
-Luego acceder al navegador:
-http://localhost:8501
+---
 
-🧠 Funcionamiento
-Lectura de Reglamentos
-El sistema recorre automáticamente la carpeta:
-Reglamentos/
-y extrae el contenido de todos los archivos PDF disponibles.
+## Ejecución
 
-Procesamiento de Consulta
-Las consultas del usuario son normalizadas para eliminar signos de puntuación y palabras irrelevantes.
-Ejemplo:
-¿Cuál es la nota mínima para aprobar?
-Se transforma en:
-nota minima aprobar
+- Ejecutar la aplicación: streamlit run web.py
+- Luego acceder al navegador: http://localhost:8501
 
-Recuperación de Información
-El sistema busca coincidencias dentro de los reglamentos utilizando palabras clave relevantes.
-Ranking
-Cada fragmento obtiene un puntaje según la cantidad de coincidencias encontradas.
-Posteriormente los resultados se ordenan para mostrar primero la información más relevante.
-Generación de Respuesta
-La información encontrada es formateada y presentada al usuario mediante una interfaz conversacional.
+---
 
-📚 Conceptos Aplicados
+## Funcionamiento
+
+- Lectura de Reglamentos: El sistema recorre automáticamente la carpeta: Reglamentos/ y extrae el contenido de todos los archivos PDF disponibles.
+- Procesamiento de Consulta: Las consultas del usuario son normalizadas para eliminar signos de puntuación y palabras irrelevantes.
+- Ejemplo: ¿Cuál es la nota mínima para aprobar?
+- Se transforma en: nota minima aprobar
+- Recuperación de Información: El sistema busca coincidencias dentro de los reglamentos utilizando palabras clave relevantes.
+- Ranking: Cada fragmento obtiene un puntaje según la cantidad de coincidencias encontradas. Posteriormente los resultados se ordenan para mostrar primero la información más relevante.
+- Generación de Respuesta: La información encontrada es formateada y presentada al usuario mediante una interfaz conversacional.
+
+---
+
+## Conceptos Aplicados
+
 Durante el desarrollo se aplicaron conceptos relacionados con:
+- Procesamiento básico de texto.
+- Recuperación de información.
+- Ranking por relevancia.
+- Programación modular.
+- Interfaces web.
+- Manejo de archivos PDF.
+- Principios de arquitectura RAG.
 
-Procesamiento básico de texto.
-Recuperación de información.
-Ranking por relevancia.
-Programación modular.
-Interfaces web.
-Manejo de archivos PDF.
-Principios de arquitectura RAG.
+---
 
-🎯 Objetivo
-Facilitar la consulta de reglamentos institucionales permitiendo que estudiantes y usuarios encuentren información relevante de forma rápida y centralizada.
+## Mejoras Futuras
 
-🔮 Mejoras Futuras
+- Integración con modelos de IA.
+- Exportación de respuestas.
+- Despliegue en servidor institucional.
 
-Implementación de búsqueda semántica.
-Integración con modelos de IA.
-Respuestas generadas mediante LLM.
-Exportación de respuestas.
-Sistema de autenticación.
-Despliegue en servidor institucional.
+---
 
-👨‍💻 Autor
-José Solda Huenante
-Proyecto desarrollado con fines académicos como asistente documental para consulta de reglamentos institucionales.
