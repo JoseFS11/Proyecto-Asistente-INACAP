@@ -4,7 +4,7 @@
 
 El siguiente proyecto surge a raiz de las constantes consultas a docentes y administrativos por temas de notas, asistencia, becas, etc. En base a esto se desarrollo un asistente documental orientado a la consulta de reglamentos institucionales de INACAP, los cuales traen todas las respuestas que los alumnos necesitan.
 
-La aplicación fue desarrollada utilizando **Python** y **Streamlit**, permitiendo buscar información dentro de distintos reglamentos en formato PDF mediante una interfaz conversacional inspirada en los principios de los sistemas **RAG (Retrieval Augmented Generation)**.
+La aplicación fue desarrollada utilizando **Python** y **Streamlit**, permitiendo de esta forma que se pueda buscar información dentro de distintos reglamentos en formato PDF mediante una interfaz conversacional inspirada en los principios de los sistemas **RAG**.
 
 ---
 
@@ -140,7 +140,7 @@ Lenguaje principal utilizado para el desarrollo del sistema.
 
 ### `Streamlit`
 
-Framework utilizado para construir la interfaz web.
+Utilizado para construir la interfaz web.
 
 ### `PyPDF`
 
@@ -202,20 +202,6 @@ Durante el desarrollo se trabajó con:
 
 ---
 
-## Mejoras futuras
-
-- Integración con modelos de IA.
-- Búsqueda semántica.
-- Respuestas más precisas.
-- Exportación de resultados.
-- Implementación de autenticación.
-- Publicación en servidor institucional.
-
----
-
 ## Autor
 
 **José Solda Huenante**
-
-Proyecto académico desarrollado para la consulta automatizada de reglamentos institucionales mediante técnicas de recuperación documental y principios RAG.
-``
