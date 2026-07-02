@@ -85,11 +85,11 @@ ASISTENTE INACAP
 │   ├── practicas.pdf
 │   └── uso_de_talleres.pdf
 │
+├── .gitignore
 ├── app_respaldo.py
 ├── logo.png
 ├── README.md
-├── web.py
-└── .gitignore
+└── web.py
 ```
 
 ---
