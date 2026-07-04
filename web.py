@@ -23,7 +23,7 @@ def leer_reglamentos():
             for pagina in pdf.pages:
                 texto = pagina.extract_text()
                 if texto:
-                    texto_total += texto + "\n"
+                    texto_total += texto + "\n\n"
 
             documentos.append({
                 "archivo": archivo,
@@ -37,61 +37,81 @@ def buscar_respuesta(documentos, pregunta, filtro):
     resultados = []
 
     palabras_vacias = [
-        "que", "qué",
-        "cual", "cuál",
-        "cuanto", "cuánto",
-        "cuanta", "cuánta",
-        "como", "cómo",
-        "es", "son",
-        "la", "las",
-        "el", "los",
-        "de", "del",
-        "un", "una",
-        "para", "por",
-        "necesito",
-        "y", "o", "a", "en", "por", "con"
+        "que", "qué", "cual", "cuál", "cuanto", "cuánto", "cuanta", "cuánta",
+        "como", "cómo", "es", "son", "la", "las", "el", "los", "de", "del",
+        "un", "una", "para", "por", "necesito", "y", "o", "a", "en", "con"
     ]
 
     pregunta = (pregunta or "").lower()
-    pregunta = pregunta.replace("¿", "")
-    pregunta = pregunta.replace("?", "")
-    pregunta = pregunta.replace(",", "")
-    pregunta = pregunta.replace(".", "")
+    pregunta = pregunta.replace("¿", "").replace("?", "").replace(",", "").replace(".", "")
 
-    terminos = [
-        palabra
-        for palabra in pregunta.split()
-        if palabra not in palabras_vacias
-    ]
+    terminos = [p for p in pregunta.split() if p not in palabras_vacias]
 
     if not terminos:
         return resultados
+
+    sinonimos = {
+        "aprobar": ["aprobacion", "aprobación", "aprobado"],
+        "nota": ["calificacion", "calificación"],
+        "asistencia": ["inasistencia"],
+        "docente": ["profesor", "académico"],
+        "beca": ["beneficio"]
+    }
 
     for documento in documentos:
         if filtro != "Todos" and filtro != documento["archivo"]:
             continue
 
-        fragmentos = [f.strip()
-                 for f in documento["texto"].split("\n\n")
-                 if len(f.strip()) > 20]
-        for fragmento in fragmentos:
-            puntaje = 0
-            for termino in terminos:
-                puntaje += fragmento.lower().count(termino) * 3
-                if "nota" in fragmento.lower():
-                    puntaje += 5
-                if "aprobar" in fragmento.lower():
-                    puntaje += 5
-                if "aprobación" in fragmento.lower():
-                    puntaje += 5
+        fragmentos = [
+            f.strip()
+            for f in documento["texto"].split("\n\n")
+            if len(f.strip()) > 50
+        ]
 
-            if any(termino in documento["archivo"].lower() for termino in terminos):
-                puntaje += 5
+        for fragmento in fragmentos:
+            if any(x in fragmento.upper() for x in ["REGLAMENTO ACADÉMICO", "TÍTULO I", "NORMAS GENERALES"]):
+                continue
+
+            lower_fragmento = fragmento.lower()
+            terminos_expandido = terminos.copy()
+            
+            for termino in terminos:
+                if termino in sinonimos:
+                    terminos_expandido.extend(sinonimos[termino])
+            
+            terminos_expandido = list(set(terminos_expandido))
+
+            puntaje = 0
+            coincidencias = 0
+
+            for termino in terminos_expandido:
+                cantidad = lower_fragmento.count(termino)
+                if cantidad > 0:
+                    coincidencias += 1
+                puntaje += cantidad * 3
+
+            puntaje += coincidencias * 15
+
+            if any(termino in documento["archivo"].lower() for termino in terminos_expandido):
+                puntaje += 10
 
             if puntaje > 0:
+                pos = -1
+                for termino in terminos:
+                    pos = lower_fragmento.find(termino)
+                    if pos != -1:
+                        break
+
+                if pos != -1:
+                    inicio = max(0, pos - 150)
+                    fin = min(len(fragmento), pos + 500)
+                    extracto = fragmento[inicio:fin]
+                else:
+                    extracto = fragmento[:400]
+
                 resultados.append({
                     "archivo": documento["archivo"],
-                    "texto": fragmento,
+                    "texto": extracto,
                     "puntaje": puntaje
                 })
 
@@ -100,11 +120,11 @@ def buscar_respuesta(documentos, pregunta, filtro):
 
 
 def generar_respuesta(resultado):
-
+    texto = resultado["texto"].replace("\n", " ").strip()
     return f"""
 De acuerdo con el reglamento {resultado['archivo']},
 
-{resultado['texto']}
+{texto}
 """
 
 if "historial" not in st.session_state:
